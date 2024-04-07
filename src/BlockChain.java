@@ -6,7 +6,7 @@
  * @author Zack Abdilah
  */
 
- public class Blockchain{
+ public class BlockChain{
 
 
   // +--------+------------------------------------------------------

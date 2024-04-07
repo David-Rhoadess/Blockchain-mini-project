@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 
 /**
  * Sort using merge sort.
@@ -42,9 +44,13 @@ public class Hash{
   public String toString(){
     String tmp = "";
     for (int i = 0; i < this.byteArray.length; i++) {
-      tmp += String.format("%x", Byte.toUnsignedInt(this.byteArray[i]));
+      tmp += String.format("%02x", Byte.toUnsignedInt(this.byteArray[i]));
     }
     return tmp;
   }
 
+  //returns true if this hash is structurally equal to the argument.
+  public boolean equals(Object other) {
+    return (other instanceof Hash) && (Arrays.equals(((Hash)other).getData(), this.getData()));
+  }
 } // class Hash
