@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 
 /**
- * Sort using merge sort.
+ * A wrappper class for a hash code byte array and includes convenient manipulation and observer methods.
  *
  * @author David Rhoades
  * @author Zack Abdilah

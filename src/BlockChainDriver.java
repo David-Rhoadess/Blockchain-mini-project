@@ -1,6 +1,6 @@
 
 /**
- * Sort using merge sort.
+ * Allows for interaction with BlockChain
  *
  * @author David Rhoades
  * @author Zack Abdilah

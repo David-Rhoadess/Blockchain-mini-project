@@ -1,6 +1,6 @@
 
 /**
- * Sort using merge sort.
+ * A singularly linked blockchain implementation
  *
  * @author David Rhoades
  * @author Zack Abdilah
