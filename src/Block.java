@@ -6,6 +6,7 @@
  */
 
 
+import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -47,10 +48,14 @@ import java.security.NoSuchAlgorithmException;
   // | Methods |
   // +---------+
 
-  public static byte[] calculateHash(String msg) throws NoSuchAlgorithmException {
+  public static byte[] calculateHash(int num, int amount, Hash prevHash, long nonce) throws NoSuchAlgorithmException {
     MessageDigest md = MessageDigest.getInstance("sha-256");
-    md.update(msg.getBytes());
-    byte[] hash = md.digest();
+    ByteBuffer bb = ByteBuffer.allocate(64);
+    md.update(bb.putInt(num));
+    md.update(bb.putInt(0, amount));
+
+    md.update(0, prevHash.getData());
+    byte[] hash = md.digest(); //start here
     return hash;
 } // calculateHash(String)
 
