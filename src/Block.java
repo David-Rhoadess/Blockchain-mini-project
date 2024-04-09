@@ -9,6 +9,7 @@
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
  public class Block{
 
@@ -28,19 +29,45 @@ import java.security.NoSuchAlgorithmException;
   // +--------------+
 
   //: creates a new block from the specified parameters, performing the mining operation to discover the nonce and hash for this block given these parameters
-  Block(int num, int amount, Hash prevHash) {
-    this.num = num;
-    this.amount = amount;
-    this.prevHash = prevHash;
-    // add mining
-  }
+  Block(int num, int amount, Hash prevHash) throws NoSuchAlgorithmException{
+    long nonce = -1;
+    Hash hash;
+    Random rand = new Random();
+    do {
+      nonce = rand.nextLong();
+      byte[] temp = calculateHash(num, amount, prevHash, nonce);
+      hash = new Hash(temp);
+    } while (! hash.isValid());
 
-  Block(int num, int amount, Hash prevHash, long nonce) {
     this.num = num;
     this.amount = amount;
     this.prevHash = prevHash;
     this.nonce = nonce;
-    //need to finish (set hash)
+    this.hash = hash;
+  }
+
+  Block(int num, int amount, Hash prevHash, long nonce) throws NoSuchAlgorithmException{
+    this.num = num;
+    this.amount = amount;
+    this.prevHash = prevHash;
+    this.nonce = nonce;
+    this.hash = new Hash(calculateHash(num, amount, prevHash, nonce));
+  }
+
+  Block(int num, int amount) throws NoSuchAlgorithmException{
+    long nonce = -1;
+    Hash hash;
+    Random rand = new Random();
+    do {
+      nonce = rand.nextLong();
+      byte[] temp = calculateHash(num, amount, nonce);
+      hash = new Hash(temp);
+    } while (! hash.isValid());
+
+    this.num = num;
+    this.amount = amount;
+    this.nonce = nonce;
+    this.hash = hash;
   }
 
 
@@ -48,14 +75,27 @@ import java.security.NoSuchAlgorithmException;
   // | Methods |
   // +---------+
 
+  //calcluates and returns the has of the given data
   public static byte[] calculateHash(int num, int amount, Hash prevHash, long nonce) throws NoSuchAlgorithmException {
     MessageDigest md = MessageDigest.getInstance("sha-256");
     ByteBuffer bb = ByteBuffer.allocate(64);
     md.update(bb.putInt(num));
     md.update(bb.putInt(0, amount));
+    md.update(prevHash.getData());
+    md.update(bb.putLong(0, nonce));
+    byte[] hash = md.digest(); 
+    return hash;
+} // calculateHash(String)
 
-    md.update(0, prevHash.getData());
-    byte[] hash = md.digest(); //start here
+
+  //calcluates and returns the has of the given data
+  public static byte[] calculateHash(int num, int amount, long nonce) throws NoSuchAlgorithmException {
+    MessageDigest md = MessageDigest.getInstance("sha-256");
+    ByteBuffer bb = ByteBuffer.allocate(64);
+    md.update(bb.putInt(num));
+    md.update(bb.putInt(0, amount));
+    md.update(bb.putLong(0, nonce));
+    byte[] hash = md.digest(); 
     return hash;
 } // calculateHash(String)
 
