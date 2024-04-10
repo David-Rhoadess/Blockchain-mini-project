@@ -99,29 +99,35 @@ import java.util.Random;
     return hash;
 } // calculateHash(String)
 
-  //returns this blocks num
+  // returns this blocks num
   public int getNum() {
     return num;
   }
 
-  //returns this blocks Amount
+  // returns this blocks Amount
   public int getAmount() {
     return amount;
   }
 
-  //returns this blocks prevHash
+  // returns this blocks prevHash
   public Hash getPrevHash() {
     return prevHash;
   }
 
-  //returns this blocks nonce
+  // returns this blocks nonce
   public long getNonce() {
     return nonce;
   }
 
-  //returns this blocks hash
+  // returns this blocks hash
   public Hash getHash() {
     return hash;
+  }
+
+  // returns a string representation of the block
+  public String toString() {
+    return "Block" + this.getNum() + " (Amount: " + this.getAmount() + ", Nonce: " + this.getNonce() + ", prevHash: " + this.getPrevHash().toString() + ", hash: " + this.getHash().toString() +")";
+
   }
 
 

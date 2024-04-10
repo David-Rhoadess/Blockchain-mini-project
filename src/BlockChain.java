@@ -75,19 +75,21 @@ import java.lang.IllegalArgumentException;
 
   // walks the blockchain and ensures that its blocks are consistent (the balances are legal) and valid (as in append).
   public boolean isValidBlockChain() {
-    int checkAlexis = this.first.value.getAmount();
+    int checkAlexis = 0;
     int checkBlake = 0;
     Node temp = this.first;
     while(temp != this.last) {
       checkAlexis += temp.value.getAmount();
-      checkBlake -= temp.value.getAmount();
+      if(temp != this.first) {
+        checkBlake -= temp.value.getAmount();
+      }
       if (temp.value.getHash() != temp.next.value.getPrevHash() || checkAlexis < 0 || checkBlake < 0){
         return false;
       }
       temp = temp.next;
     }
 
-    checkAlexis += this.last.value.getAmount();
+    checkAlexis += temp.value.getAmount();
     checkBlake -= temp.value.getAmount();
     if(checkAlexis < 0 || checkBlake < 0) {
       return false;
@@ -96,16 +98,29 @@ import java.lang.IllegalArgumentException;
     }
   } // isValidBlockChain
 
-  // prints Alexis’s and Blake’s respective balances
+  // prints Alexis’s and Blake’s respective balances, 
+  // precondition: this is a valid BlockChain
   public void printBalances(PrintWriter pen){
-    Node temp = this.first;
+    int checkAlexis = this.first.value.getAmount();
+    int checkBlake = 0;
+    Node temp = this.first.next;
     while(temp != null) {
-      pen.println("Alexis: " + )
+      checkAlexis += temp.value.getAmount();
+      checkBlake -= temp.value.getAmount();
+      temp = temp.next;
     }
+    pen.println("Alexis: " + checkAlexis + ", Blake: " + checkBlake); 
   } // printBalances
 
-  // eturns a string representation of the BlockChain which is simply the string representation of each of its blocks, earliest to latest, one per line.
+  // returns a string representation of the BlockChain which is simply the string representation of each of its blocks, earliest to latest, one per line.
   public String toString() {
-
+    String ret = "";
+    Node temp = this.first;
+    while(temp != null) {
+      ret += temp.value.toString();
+      ret += "/n";
+      temp = temp.next;
+    }
+    return ret;
   } // toString
 } // class BlockChain

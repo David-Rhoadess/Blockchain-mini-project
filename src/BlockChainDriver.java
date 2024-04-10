@@ -8,7 +8,6 @@
 
  public class BlockChainDriver{
 
-
   // +--------+------------------------------------------------------
   // | Fields |
   // +--------+
@@ -17,10 +16,13 @@
   // | Constructors |
   // +--------------+
 
-
   // +---------+-----------------------------------------------------
   // | Methods |
   // +---------+
 
+  public static void main(String[] args) {
+    
+  }
 
-} // class Hash
+
+} // BlockChainDriver
