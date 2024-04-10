@@ -56,31 +56,56 @@ import java.lang.IllegalArgumentException;
   
   // removes the last block from the chain, returning true. If the chain only contains a single block, then removeLast does nothing and returns false.
   public boolean removeLast(){
-    if (this.first == this.last){
+    if (this.first == this.last) {
       return false;
-    else{
-      this // start here
+    } else {
+      this.last = this.first;
+      for (int i = 0; i < this.last.value.getNum() - 1; i++) {
+        this.last = this.last.next;
+      }
+      this.last.next  = null;
+      return true;
     }
-    }
-  }
+  } // removeLast
 
   // returns the hash of the last block in the chain.
-  public Hash getHash(){
+  public Hash getHash() {
+    return this.last.value.getHash();
+  } // getHash
 
-  }
+  // walks the blockchain and ensures that its blocks are consistent (the balances are legal) and valid (as in append).
+  public boolean isValidBlockChain() {
+    int checkAlexis = this.first.value.getAmount();
+    int checkBlake = 0;
+    Node temp = this.first;
+    while(temp != this.last) {
+      checkAlexis += temp.value.getAmount();
+      checkBlake -= temp.value.getAmount();
+      if (temp.value.getHash() != temp.next.value.getPrevHash() || checkAlexis < 0 || checkBlake < 0){
+        return false;
+      }
+      temp = temp.next;
+    }
 
-  // alks the blockchain and ensures that its blocks are consistent (the balances are legal) and valid (as in append).
-  public boolean isValidBlockChain(
-
-  )
+    checkAlexis += this.last.value.getAmount();
+    checkBlake -= temp.value.getAmount();
+    if(checkAlexis < 0 || checkBlake < 0) {
+      return false;
+    } else {
+      return true;
+    }
+  } // isValidBlockChain
 
   // prints Alexis’s and Blake’s respective balances
   public void printBalances(PrintWriter pen){
-
-  }
+    Node temp = this.first;
+    while(temp != null) {
+      pen.println("Alexis: " + )
+    }
+  } // printBalances
 
   // eturns a string representation of the BlockChain which is simply the string representation of each of its blocks, earliest to latest, one per line.
-  public String toString(){
+  public String toString() {
 
-  }
+  } // toString
 } // class BlockChain
