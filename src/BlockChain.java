@@ -39,7 +39,7 @@ import java.lang.IllegalArgumentException;
   }
   // returns the size of the blockchain
   public int getSize(){
-    return this.last.value.getNum();
+    return this.last.value.getNum() + 1;
   } // getSize
 
   // adds this block to the list
@@ -118,7 +118,7 @@ import java.lang.IllegalArgumentException;
     Node temp = this.first;
     while(temp != null) {
       ret += temp.value.toString();
-      ret += "/n";
+      ret += "\n";
       temp = temp.next;
     }
     return ret;

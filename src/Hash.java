@@ -42,11 +42,11 @@ public class Hash{
 
   //returns the string representation of the hash as a string of hexadecimal digits, 2 digits per byte.
   public String toString(){
-    String tmp = "";
-    for (int i = 0; i < this.byteArray.length; i++) {
-      tmp += String.format("%02x", Byte.toUnsignedInt(this.byteArray[i]));
-    }
-    return tmp;
+      String tmp = "";
+      for (int i = 0; i < this.byteArray.length; i++) {
+        tmp += String.format("%02x", Byte.toUnsignedInt(this.byteArray[i]));
+      }
+      return tmp;
   }
 
   //returns true if this hash is structurally equal to the argument.
