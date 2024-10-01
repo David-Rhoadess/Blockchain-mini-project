@@ -1,3 +1,8 @@
+import java.nio.ByteBuffer;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Random;
+
 /**
  * An individual node within a BlockChain
  * 
@@ -5,11 +10,6 @@
  * @author Zack Abdilah
  */
 
-
-import java.nio.ByteBuffer;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Random;
 
  public class Block{
 
