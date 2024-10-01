@@ -8,7 +8,7 @@ Aknowledgements:
 
 We talked with CS Tutor Boston Gunderson about Java format stings and String.format.
 
-We referenced the assignmemt for function descriptions and implementation hints
+We referenced the https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/schedule/ for structure and implementation hints
 
 David talked with Shibam Mukhopadhyay about updating MessageDigest
 
