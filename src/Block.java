@@ -81,7 +81,7 @@ import java.util.Random;
   // | Methods |
   // +---------+
 
-  //calcluates and returns the has of the given data
+  //calcluates and returns the hash of the given data
   public static byte[] calculateHash(int num, int amount, Hash prevHash, long nonce) throws NoSuchAlgorithmException {
     MessageDigest md = MessageDigest.getInstance("sha-256");
     md.update(ByteBuffer.allocate(Integer.BYTES).putInt(num).array());
@@ -93,7 +93,7 @@ import java.util.Random;
 } // calculateHash(String)
 
 
-  //calcluates and returns the has of the given data
+  //calcluates and returns the hash of the given data
   public static byte[] calculateHash(int num, int amount, long nonce) throws NoSuchAlgorithmException {
     MessageDigest md = MessageDigest.getInstance("sha-256");
     md.update(ByteBuffer.allocate(Integer.BYTES).putInt(num).array());
